@@ -12,7 +12,7 @@ from scipy.stats import chi2
 matplotlib.use("TkAgg")
 
 BASE_HISTOGRAM_OUTPUT = "./results/histogram.png"
-BASE_INPUT_FILE = "./output.json"
+BASE_INPUT_FILE = "output/output.json"
 
 if not os.path.isdir("./results"):
     os.mkdir("./results")
