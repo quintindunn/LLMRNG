@@ -4,10 +4,14 @@ import os
 from tqdm import tqdm
 from ollama import ChatResponse, chat
 
+OUTPUT_FILE = "./output/output.json"
 EXPECTED_NUM_NUMBERS_PER_RESPONSE: int = 100
 NUM_RESPONSES: int = 1000
 MODEL: str = "llama3.2"
 CALCULATE_RESULTS: bool = True
+
+if not os.path.isdir("./output"):
+    os.mkdir("./output")
 
 
 def generate_response(prompt: str = f"generate {EXPECTED_NUM_NUMBERS_PER_RESPONSE} random numbers 0-100 in the format: "
@@ -58,7 +62,7 @@ def get_numbers() -> list[int]:
     return num
 
 
-def generate_iterations(iter_count: int, output_file: str | os.PathLike = "./output.json"):
+def generate_iterations(iter_count: int, output_file: str | os.PathLike = OUTPUT_FILE):
     """
     Generates the dataset
     :param iter_count: The amount of iterations of get_numbers(...)
@@ -76,4 +80,4 @@ def generate_iterations(iter_count: int, output_file: str | os.PathLike = "./out
 
 
 if __name__ == '__main__':
-    generate_iterations(NUM_RESPONSES, "output.json")
+    generate_iterations(NUM_RESPONSES, OUTPUT_FILE)

@@ -11,6 +11,12 @@ from scipy.stats import chi2
 # Fixes issue with matplotlib backend in pycharm.
 matplotlib.use("TkAgg")
 
+BASE_HISTOGRAM_OUTPUT = "./results/histogram.png"
+BASE_INPUT_FILE = "./output.json"
+
+if not os.path.isdir("./results"):
+    os.mkdir("./results")
+
 
 def get_data(input_file: str | os.PathLike) -> list:
     """
@@ -52,7 +58,7 @@ def joined_data(input_file: str | os.PathLike) -> list[int]:
     return final
 
 
-def graph(input_file: str | os.PathLike = "./histogram.png", output: str | os.PathLike = "./histogram.png",
+def graph(input_file: str | os.PathLike = BASE_INPUT_FILE, output: str | os.PathLike = BASE_HISTOGRAM_OUTPUT,
           show: bool = False, save: bool = True, save_dpi: int = 900) -> None:
     """
     Graphs the numbers on a histogram and saves to f"./{output}"
@@ -81,7 +87,7 @@ def graph(input_file: str | os.PathLike = "./histogram.png", output: str | os.Pa
     print(f"Saved graph to \"{output}\".")
 
 
-def most_common(input_file: str | os.PathLike = "./output.json") -> int:
+def most_common(input_file: str | os.PathLike = BASE_INPUT_FILE) -> int:
     """
     Finds the most common integer in the list.
     :param input_file: The path to the input file.
@@ -94,7 +100,7 @@ def most_common(input_file: str | os.PathLike = "./output.json") -> int:
 
 
 def chi_squared(minimum: int = 0, maximum: int = 100, df: int = 100, p: float = 0.05,
-                input_file: str | os.PathLike = "./output.json") -> None:
+                input_file: str | os.PathLike = BASE_INPUT_FILE) -> None:
     """
     Calculated the chi-squared test statistic on the numbers
     :param minimum: The minimum number present
@@ -129,7 +135,7 @@ def chi_squared(minimum: int = 0, maximum: int = 100, df: int = 100, p: float = 
 
 
 def full_generation(input_file: str | os.PathLike, x2_min: int = 0, x2_max: int = 100,
-                    x2_df: int = 100, x2_p: float = 0.05, histogram_output: str | os.PathLike = "./histogram.png"):
+                    x2_df: int = 100, x2_p: float = 0.05, histogram_output: str | os.PathLike = BASE_HISTOGRAM_OUTPUT):
     """
     Runs all the result functions
     :param input_file: The path to the input file
@@ -146,4 +152,4 @@ def full_generation(input_file: str | os.PathLike, x2_min: int = 0, x2_max: int 
 
 
 if __name__ == '__main__':
-    full_generation("./output.json")
+    full_generation(BASE_INPUT_FILE)
